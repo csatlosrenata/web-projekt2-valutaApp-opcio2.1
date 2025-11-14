@@ -16,12 +16,11 @@ class _HomePageState extends State<HomePage> {
   String to = "EUR";
   double? result;
 
-  // Átváltás és mentés Firestore-ba
+  
   Future<void> convert() async {
     final converted = await ApiService.convert(from, to, amountController.text);
     setState(() => result = converted);
 
-    // Napi árfolyam mentése Firestore-ba
     final rate = await ApiService.getCurrentRate(from, to);
     if (rate != null) {
       final today = DateTime.now();
